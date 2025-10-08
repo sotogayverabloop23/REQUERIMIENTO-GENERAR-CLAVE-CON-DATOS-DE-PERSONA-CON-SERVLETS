@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clave Sonic</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #0057b7, #ffd200);
+      font-family: 'Press Start 2P', cursive, monospace;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .resultado {
+      width: 420px;
+      background-color: #003580cc;
+      padding: 3rem 2rem;
+      border-radius: 18px;
+      box-shadow: 0 0 30px #ffd200aa inset;
+      text-align: center;
+      border: 3px solid #ffd200;
+      user-select: all;
+    }
+
+    h2 {
+      font-size: 2.6rem;
+      margin-bottom: 2rem;
+      letter-spacing: 0.12em;
+      color: #ffd200;
+      text-shadow: 0 0 10px #fbf10d;
+    }
+
+    p {
+      font-size: 4rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 3rem;
+      font-weight: 900;
+      color: #fff;
+      text-shadow:
+        0 0 8px #f9f871,
+        0 0 15px #ffc107;
+    }
+
+    a {
+      font-family: 'Press Start 2P', monospace;
+      display: inline-block;
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 0.8rem 2.2rem;
+      border-radius: 20px;
+      color: #003580;
+      background-color: #ffd200;
+      text-decoration: none;
+      box-shadow: 0 0 15px #fbcf3d;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #ffeb3b;
+      box-shadow: 0 0 25px #fbee7e;
+      color: #002a5c;
+    }
+  </style>
+</head>
+<body>
+  <div class="respuesta">
+    <h2>Clave Generada</h2>
+    <p th:text="${clave}">Aquí aparecerá la clave generada</p>
+    <a th:href="@{/}">Volver al formulario</a>
+  </div>
+</body>
+</html>
