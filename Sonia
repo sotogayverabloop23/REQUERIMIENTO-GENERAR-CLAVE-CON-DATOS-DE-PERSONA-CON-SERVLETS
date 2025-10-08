@@ -1,0 +1,60 @@
+package com.example.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
+@Controller
+public class Sonia {
+
+    @GetMapping("/")
+    public String mostrarFormulario() {
+        return "vaporeon";  
+    }
+
+    @PostMapping("/respuesta")
+    public String procesarFormulario(
+            @RequestParam("nombre") Optional<String> nombreOpt,
+            @RequestParam("apellido") Optional<String> apellidoOpt,
+            @RequestParam("fechaNacimiento") Optional<String> fechaOpt,
+            Model model) {
+
+        String nombre = nombreOpt.orElse("NN");
+        String apellido = apellidoOpt.orElse("");
+        String fechaStr = fechaOpt.orElse("1900-01-01");
+        LocalDate fecha = LocalDate.parse(fechaStr, DateTimeFormatter.ISO_DATE);
+
+        String clave = generarClave(nombre, apellido, fecha);
+
+        model.addAttribute("clave", clave);  
+        return "feti";  
+    }
+
+    private String generarClave(String nombre, String apellido, LocalDate fecha) {
+        String n = nombre.length() >= 2 ? nombre.substring(0, 2).toUpperCase() : nombre.toUpperCase();
+        String a = apellido.length() > 0 ? apellido.substring(0,1).toUpperCase() : "";
+
+        String anio = String.valueOf(fecha.getYear());
+        String mes = String.format("%02d", fecha.getMonthValue());
+        String dia = String.format("%02d", fecha.getDayOfMonth());
+
+        StringBuilder resultado = new StringBuilder();
+        resultado.append(n.charAt(0));
+        resultado.append(anio.charAt(0));
+        resultado.append(a.isEmpty() ? 'X' : a.charAt(0));
+        resultado.append(anio.charAt(1));
+        resultado.append(n.charAt(1));
+        resultado.append(anio.charAt(2));
+        resultado.append(mes.charAt(0));
+        resultado.append(anio.charAt(3));
+        resultado.append(mes.charAt(1));
+        resultado.append(dia.charAt(0));
+        resultado.append(dia.charAt(1));
+
+        return resultado.toString();
+    }
+}
